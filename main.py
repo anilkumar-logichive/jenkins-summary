@@ -33,7 +33,7 @@ s3_client = boto3.client('s3')
 
 @app.get("/build/number")
 async def get_latest_build():
-    """Function to get the latest build of jobs and update the build number to s3 bucket."""
+    """Function to get the latest build of jobs and update the last build number to s3 bucket."""
     try:
         for job in jobs:
             job_name = job['name']
