@@ -25,9 +25,7 @@ host = os.getenv("HOST")
 bucket_name = os.getenv("S3_BUCKET")
 
 app = FastAPI()
-server = jenkins.Jenkins(jenkins_url, username=username, password=password)
 
-jobs = server.get_all_jobs(folder_depth=None)
 s3_client = boto3.client('s3')
 
 
@@ -35,6 +33,9 @@ s3_client = boto3.client('s3')
 async def get_latest_build():
     """Function to get the latest build of jobs and update the last build number to s3 bucket."""
     try:
+        server = jenkins.Jenkins(jenkins_url, username=username, password=password)
+
+        jobs = server.get_all_jobs(folder_depth=None)
         for job in jobs:
             job_name = job['name']
             build_number = server.get_job_info(job_name)['nextBuildNumber'] - 1
@@ -46,13 +47,13 @@ async def get_latest_build():
                 fw.write(json.dumps({"lastBuildNumber": build_number}, indent=4))
             s3_client.upload_file(file_path, bucket_name,
                                   f"reports/{job_name}/lastBuildNumber/last_build.json")
-        await fetch_build_info()
+        await fetch_build_info(jobs, server)
         return 'success'
     except Exception as e:
         return f"Failed with error: {str(e)}"
 
 
-async def fetch_build_info():
+async def fetch_build_info(jobs, server):
     """Function to get all job build summary and upload it to s3 bucket."""
     try:
         for job in jobs:
