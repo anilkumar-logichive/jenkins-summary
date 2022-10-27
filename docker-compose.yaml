@@ -1,14 +1,10 @@
 version: '3.8'
 
 services:
-  jenkins:
-    image: jenkins/jenkins:lts
-    privileged: true
-    user: root
-    ports:
-      - 8080:8080
-      - 50000:50000
-    container_name: jenkins
+  web:
+    build: .
+    command: uvicorn app.main:app --host 0.0.0.0
     volumes:
-      - ./jenkins_configuration:/var/jenkins_home
-      - ./run/docker.sock:/var/run/docker.sock
+      - .:/code/app
+    ports:
+      - 8008:8000
