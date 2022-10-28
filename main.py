@@ -36,11 +36,11 @@ def get_latest_build():
             if not os.path.exists(f"reports/{job_name}/lastBuildNumber"):
                 os.makedirs(f"reports/{job_name}/lastBuildNumber")
 
-            file_path = f"reports/{job_name}/lastBuildNumber/last_build.json"
+            file_path = f"reports/{job_name}/lastBuildNumber/meta.json"
             with open(file_path, "w") as fw:
                 fw.write(json.dumps({"lastBuildNumber": build_number}, indent=4))
             s3_client.upload_file(file_path, bucket_name,
-                                  f"reports/{job_name}/lastBuildNumber/last_build.json")
+                                  f"reports/{job_name}/lastBuildNumber/meta.json")
             fetch_build_info(job_name, build_number, server)
         return 'success'
     except Exception as e:
