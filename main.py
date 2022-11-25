@@ -21,7 +21,11 @@ host = os.getenv("HOST")
 
 # s3 bucket
 bucket_name = os.getenv("S3_BUCKET")
-s3_client = boto3.client('s3')
+access_key = os.getenv("ACCESS_KEY")
+secret_key = os.getenv("SECRET_KEY")
+
+
+s3_client = boto3.client('s3', aws_access_key_id=access_key, aws_secret_access_key=secret_key)
 
 
 def get_latest_build():

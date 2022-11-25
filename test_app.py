@@ -1,5 +1,7 @@
 import unittest
 
+import pytest
+
 from logic import check_posted_data
 
 
@@ -22,7 +24,45 @@ class TestSnippet(unittest.TestCase):
 
     def test_check_posted_data_second_set(self):
         print(f"Testing function - {check_posted_data.__name__} Set 2")
-        data_list = [[{"x": 187, "y": 323}, "add", 200], [{"x": 143, "y": 0}, "division", 302], [{"y": 143}, "division",
+        data_list = [[{"x": 184, "y": 323}, "add", 200], [{"x": 143, "y": 0}, "division", 302], [{"y": 143}, "division",
+                                                                                                 301]]
+
+        for data in data_list:
+            result = check_posted_data(data[0], data[1])
+
+            self.assertEqual(result, data[2])
+
+            print(f"Test data - {data}")
+
+    def test_check_posted_data_third_set(self):
+        print(f"Testing function - {check_posted_data.__name__} Set 2")
+        data_list = [[{"x": 184}, "add", 200], [{"x": 143, "y": 0}, "division", 302], [{"y": 143}, "division",
+                                                                                       301]]
+
+        for data in data_list:
+            result = check_posted_data(data[0], data[1])
+
+            self.assertEqual(result, data[2])
+
+            print(f"Test data - {data}")
+
+    @pytest.mark.skip(reason="no way of currently testing this")
+    def test_check_posted_data_fourth_set(self):
+        print(f"Testing function - {check_posted_data.__name__} Set 2")
+        data_list = [[{"x": 184, "y": 323}, "add", 200], [{"x": 143, "y": 0}, "division", 302], [{"y": 143}, "division",
+                                                                                                 301]]
+
+        for data in data_list:
+            result = check_posted_data(data[0], data[1])
+
+            self.assertEqual(result, data[2])
+
+            print(f"Test data - {data}")
+
+    @pytest.mark.skip(reason="no way of currently testing this")
+    def test_check_posted_data_fifth_set(self):
+        print(f"Testing function - {check_posted_data.__name__} Set 2")
+        data_list = [[{"x": 184, "y": 323}, "add", 200], [{"x": 143, "y": 0}, "division", 302], [{"y": 143}, "division",
                                                                                                  301]]
 
         for data in data_list:
