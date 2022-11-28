@@ -32,8 +32,8 @@ def get_latest_build():
     """Function to get the latest build of jobs and update the last build number to s3 bucket."""
     try:
         server = jenkins.Jenkins(jenkins_url, username=username, password=password)
-
         jobs = server.get_all_jobs(folder_depth=None)
+
         for job in jobs:
             job_name = job['name']
             build_number = server.get_job_info(job_name)['nextBuildNumber'] - 1
