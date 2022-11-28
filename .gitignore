@@ -2,3 +2,4 @@
 /reports
 /run
 .idea
+.pytest_cache
