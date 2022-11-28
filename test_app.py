@@ -4,7 +4,7 @@ from logic import check_posted_data
 
 
 class TestSnippet(unittest.TestCase):
-
+    @unittest.skip("demonstrating skipping")
     def test_check_posted_data_first_set(self):
         # testing the check_posted_data method with different input sets
 
@@ -51,6 +51,7 @@ class TestSnippet2(unittest.TestCase):
 
             print(f"Test data - {data}")
 
+    @unittest.skip("demonstrating skipping")
     def test_check_posted_data_fourth_set(self):
         print(f"Testing function - {check_posted_data.__name__} Set 4")
         data_list = [[{"x": 184, "y": 323}, "add", 200], [{"x": 143, "y": 0}, "division", 302], [{"y": 143}, "division",
@@ -79,6 +80,7 @@ class TestSnippet4(unittest.TestCase):
 
 
 class TestSnippet5(unittest.TestCase):
+    @unittest.skip("demonstrating skipping")
     def test_check_posted_data_sixth_set(self):
         print(f"Testing function - {check_posted_data.__name__} Set 5")
         data_list = [[{"x": 184, "y": 323}, "add", 200], [{"x": 143, "y": 0}, "division", 302], [{"y": 143}, "division",
