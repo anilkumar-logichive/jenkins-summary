@@ -22,6 +22,7 @@ class TestSnippet(unittest.TestCase):
 
 
 class TestSnippet1(unittest.TestCase):
+    @unittest.skip("demonstrating skipping")
     def test_check_posted_data_second_set(self):
         print(f"Testing function - {check_posted_data.__name__} Set 2")
         data_list = [[{"x": 184, "y": 323}, "add", 200], [{"x": 143, "y": 0}, "division", 302], [{"y": 143}, "division",
@@ -36,6 +37,7 @@ class TestSnippet1(unittest.TestCase):
 
 
 class TestSnippet2(unittest.TestCase):
+    @unittest.skip("demonstrating skipping")
     def test_check_posted_data_third_set(self):
 
         print(f"Testing function - {check_posted_data.__name__} Set 3")
@@ -49,6 +51,7 @@ class TestSnippet2(unittest.TestCase):
 
             print(f"Test data - {data}")
 
+    @unittest.skip("demonstrating skipping")
     def test_check_posted_data_fourth_set(self):
         print(f"Testing function - {check_posted_data.__name__} Set 4")
         data_list = [[{"x": 184, "y": 323}, "add", 200], [{"x": 143, "y": 0}, "division", 302], [{"y": 143}, "division",
@@ -63,6 +66,7 @@ class TestSnippet2(unittest.TestCase):
 
 
 class TestSnippet4(unittest.TestCase):
+    @unittest.skip("demonstrating skipping")
     def test_check_posted_data_fifth_set(self):
         print(f"Testing function - {check_posted_data.__name__} Set 5")
         data_list = [[{"x": 184, "y": 323}, "add", 200], [{"x": 143, "y": 0}, "division", 302], [{"y": 143}, "division",
