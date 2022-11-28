@@ -41,8 +41,8 @@ class TestSnippet2(unittest.TestCase):
     def test_check_posted_data_third_set(self):
 
         print(f"Testing function - {check_posted_data.__name__} Set 3")
-        data_list = [[{"x": 184}, "add", 200], [{"x": 143, "y": 0}, "division", 302], [{"y": 143}, "division",
-                                                                                       301]]
+        data_list = [[{"x": 184, "y": 323}, "add", 200], [{"x": 143, "y": 0}, "division", 302], [{"y": 143}, "division",
+                                                                                                 301]]
 
         for data in data_list:
             result = check_posted_data(data[0], data[1])
@@ -76,13 +76,13 @@ class TestSnippet4(unittest.TestCase):
             self.assertEqual(result, data[2])
 
             print(f"Test data - {data}")
-            
+
 
 class TestSnippet5(unittest.TestCase):
-    def test_check_posted_data_fifth_set(self):
+    def test_check_posted_data_sixth_set(self):
         print(f"Testing function - {check_posted_data.__name__} Set 5")
-        data_list = [[{"y": 323}, "add", 200], [{"x": 143, "y": 0}, "division", 302], [{"y": 143}, "division",
-                                                                                       301]]
+        data_list = [[{"x": 184, "y": 323}, "add", 200], [{"x": 143, "y": 0}, "division", 302], [{"y": 143}, "division",
+                                                                                                 301]]
 
         for data in data_list:
             result = check_posted_data(data[0], data[1])
