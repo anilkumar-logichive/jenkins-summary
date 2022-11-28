@@ -33,7 +33,6 @@ def get_latest_build():
     try:
         server = jenkins.Jenkins(jenkins_url, username=username, password=password)
         jobs = server.get_all_jobs(folder_depth=None)
-        print("-----", jobs)
         for job in jobs:
             job_name = job['name']
             build_number = server.get_job_info(job_name)['nextBuildNumber'] - 1

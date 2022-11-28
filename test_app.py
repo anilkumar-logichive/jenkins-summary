@@ -1,12 +1,10 @@
 import unittest
 
-import pytest
-
 from logic import check_posted_data
 
 
 class TestSnippet(unittest.TestCase):
-
+    @unittest.skip("demonstrating skipping")
     def test_check_posted_data_first_set(self):
         # testing the check_posted_data method with different input sets
 
