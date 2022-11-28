@@ -39,7 +39,7 @@ class TestSnippet(unittest.TestCase):
     def test_check_posted_data_third_set(self):
 
         print(f"Testing function - {check_posted_data.__name__} Set 3")
-        data_list = [[{"x": 184}, "add", 200], [{"x": 143, "y": 0}, "division", 302], [{"y": 143}, "division",
+        data_list = [[{"x": 184, "y": 323}, "add", 200], [{"x": 143, "y": 0}, "division", 302], [{"y": 143}, "division",
                                                                                        301]]
 
         for data in data_list:

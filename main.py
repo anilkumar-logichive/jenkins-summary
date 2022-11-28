@@ -33,7 +33,7 @@ def get_latest_build():
     try:
         server = jenkins.Jenkins(jenkins_url, username=username, password=password)
         jobs = server.get_all_jobs(folder_depth=None)
-
+        print("-----", jobs)
         for job in jobs:
             job_name = job['name']
             build_number = server.get_job_info(job_name)['nextBuildNumber'] - 1
@@ -43,8 +43,9 @@ def get_latest_build():
             file_path = f"reports/{job_name}/lastBuildNumber/meta.json"
             with open(file_path, "w") as fw:
                 fw.write(json.dumps({"lastBuildNumber": build_number}, indent=4))
-            s3_client.upload_file(file_path, bucket_name,
+            resp = s3_client.upload_file(file_path, bucket_name,
                                   f"reports/{job_name}/lastBuildNumber/meta.json")
+            print(resp)
             fetch_build_info(job_name, build_number, server)
         return 'success'
     except Exception as e:
