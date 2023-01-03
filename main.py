@@ -1,4 +1,5 @@
 import os
+import sys
 import traceback
 import boto3
 import jenkins
@@ -11,18 +12,18 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # jenkins
-username = os.getenv("USER_NAME")
-password = os.getenv("PASSWORD")
-jenkins_url = os.getenv("JENKINS_URL")
+username = sys.argv[2]
+password = sys.argv[3]
+jenkins_url = sys.argv[4]
 
 # server
 port = os.getenv("PORT")
 host = os.getenv("HOST")
 
 # s3 bucket
-bucket_name = os.getenv("S3_BUCKET")
-access_key = os.getenv("ACCESS_KEY")
-secret_key = os.getenv("SECRET_KEY")
+bucket_name = sys.argv[5]
+access_key = sys.argv[6]
+secret_key = sys.argv[7]
 
 
 s3_client = boto3.client('s3', aws_access_key_id=access_key, aws_secret_access_key=secret_key)
@@ -77,3 +78,20 @@ def fetch_build_info(job_name, build_number, server):
 
 if __name__ == "__main__":
     get_latest_build()
+
+
+
+# post {
+#         always {
+#             junit allowEmptyResults: true, skipOldReports: true, skipPublishingChecks: true, testResults:'**/test_reports/*.xml'
+#             git 'https://github.com/urer-name/jenkins-summary.git'
+#             sh 'python3 main.py'
+#             echo 'The pipeline completed'
+#         }
+#         success {
+#             echo "Build successful"
+#         }
+#         failure {
+#             echo 'Build stage failed'
+#         }
+#     }
