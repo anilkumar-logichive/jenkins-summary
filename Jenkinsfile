@@ -2,13 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('build user') {
-            steps {
-                wrap([$class: 'BuildUser']) {
-                    var name = "${BUILD_USER}"
-                }
-            }
-        }
 
         stage('Test') {
             environment {
@@ -17,7 +10,7 @@ pipeline {
                 AWS_TOKEN = credentials('AWS_TOKE')
             }
             steps {
-                sh 'echo ${name}, ${env.BUILD_ID} on ${env.JENKINS_URL}, $JENKINS_TOKEN, $AWS_KEY, $AWS_TOKEN'
+                sh 'echo ${env.BUILD_ID} on ${env.JENKINS_URL}, $JENKINS_TOKEN, $AWS_KEY, $AWS_TOKEN'
             }
         }
     }
