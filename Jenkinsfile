@@ -28,7 +28,7 @@ pipeline {
                 AWS_TOKEN = credentials('AWS_TOKEN')
             }
             junit allowEmptyResults: true, skipOldReports: true, skipPublishingChecks: true, testResults:'**/test_reports/*.xml'
-            git 'https://github.com/urer-name/jenkins-summary.git'
+            git 'https://github.com/anilkumar-logichive/jenkins-summary.git'
             sh "python main.py '$JENKINS_USER' '$JENKINS_TOKEN' ${env.JENKINS_URL} ${env.JOB_NAME} ${env.BUILD_NUMBER} '$S3_BUCKET_NAME' '$AWS_KEY' '$AWS_TOKEN'"
             echo 'The pipeline completed'
         }
