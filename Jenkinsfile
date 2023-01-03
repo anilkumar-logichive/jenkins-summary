@@ -1,4 +1,6 @@
 pipeline {
+    agent any
+
     environment {
         GIT_URL = credentials('GIT_URL')
         JENKINS_USER = "anilkumar_admin"
