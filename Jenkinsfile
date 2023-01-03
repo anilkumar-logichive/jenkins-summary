@@ -4,9 +4,13 @@ pipeline {
     }
 
     stages {
-         stage('Checkout') {
+        environment {
+                GIT_URL = credentials('GIT_URL')
+        }
+
+        stage('Checkout') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/anilkumar-logichive/jenkins-test-python.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: '$GIT_URL']]])
             }
         }
 
@@ -26,9 +30,11 @@ pipeline {
                 S3_BUCKET_NAME = credentials('BUCKET_NAME')
                 AWS_KEY = credentials('ACCESS_KEY')
                 AWS_TOKEN = credentials('AWS_TOKEN')
+                SUMMARY_URL = credentials('SUMMARY_URL')
             }
             junit allowEmptyResults: true, skipOldReports: true, skipPublishingChecks: true, testResults:'**/test_reports/*.xml'
-            git 'https://github.com/anilkumar-logichive/jenkins-summary.git'
+            git '$SUMMARY_URL'
+            sh "echo '$JENKINS_USER' '$JENKINS_TOKEN' ${env.JENKINS_URL} ${env.JOB_NAME} ${env.BUILD_NUMBER} '$S3_BUCKET_NAME' '$AWS_KEY' '$AWS_TOKEN'"
             sh "python main.py '$JENKINS_USER' '$JENKINS_TOKEN' ${env.JENKINS_URL} ${env.JOB_NAME} ${env.BUILD_NUMBER} '$S3_BUCKET_NAME' '$AWS_KEY' '$AWS_TOKEN'"
             echo 'The pipeline completed'
         }
