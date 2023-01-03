@@ -2,12 +2,13 @@ pipeline {
     agent {
         docker { image 'python:3.11-alpine' }
     }
+    environment {
+         GIT_URL = credentials('GIT_URL')
+    }
 
     stages {
         stage('Checkout') {
-            environment {
-                GIT_URL = credentials('GIT_URL')
-            }
+
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: '$GIT_URL']]])
             }
