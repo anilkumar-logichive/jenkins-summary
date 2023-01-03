@@ -16,9 +16,9 @@ job_name = sys.argv[4]
 build_number = sys.argv[5]
 
 # s3 bucket
-bucket_name = sys.argv[4]
-access_key = sys.argv[6]
-secret_key = sys.argv[7]
+bucket_name = sys.argv[6]
+access_key = sys.argv[7]
+secret_key = sys.argv[8]
 
 s3_client = boto3.client('s3', aws_access_key_id=access_key, aws_secret_access_key=secret_key)
 
