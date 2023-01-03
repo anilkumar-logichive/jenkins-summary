@@ -10,7 +10,7 @@ pipeline {
                 AWS_TOKEN = credentials('AWS_TOKEN')
             }
             steps {
-                sh 'echo ${env.BUILD_ID} on ${env.JENKINS_URL}, ${JENKINS_TOKEN}, ${AWS_KEY}, ${AWS_TOKEN}'            }
+                sh 'echo ${env.BUILD_ID} on ${env.JENKINS_URL}, $JENKINS_TOKEN, $AWS_KEY, $AWS_TOKEN'            }
         }
     }
 
