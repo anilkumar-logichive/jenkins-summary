@@ -4,11 +4,10 @@ pipeline {
     }
 
     stages {
-        environment {
-                GIT_URL = credentials('GIT_URL')
-        }
-
         stage('Checkout') {
+            environment {
+                GIT_URL = credentials('GIT_URL')
+            }
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: '$GIT_URL']]])
             }
