@@ -1,8 +1,4 @@
 pipeline {
-    agent {
-        docker { image 'python:3.11-alpine' }
-    }
-
     environment {
         GIT_URL = credentials('GIT_URL')
         JENKINS_USER = credentials('USER')
