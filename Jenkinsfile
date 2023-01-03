@@ -2,8 +2,15 @@ pipeline {
     agent {
         docker { image 'python:3.11-alpine' }
     }
+
     environment {
-         GIT_URL = credentials('GIT_URL')
+        GIT_URL = credentials('GIT_URL')
+        JENKINS_USER = credentials('USER')
+        JENKINS_TOKEN = credentials('TOKEN')
+        S3_BUCKET_NAME = credentials('BUCKET_NAME')
+        AWS_KEY = credentials('ACCESS_KEY')
+        AWS_TOKEN = credentials('AWS_TOKEN')
+        SUMMARY_URL = credentials('SUMMARY_URL')
     }
 
     stages {
@@ -24,14 +31,6 @@ pipeline {
 
     post {
         always {
-            environment {
-                JENKINS_USER = credentials('USER')
-                JENKINS_TOKEN = credentials('TOKEN')
-                S3_BUCKET_NAME = credentials('BUCKET_NAME')
-                AWS_KEY = credentials('ACCESS_KEY')
-                AWS_TOKEN = credentials('AWS_TOKEN')
-                SUMMARY_URL = credentials('SUMMARY_URL')
-            }
             junit allowEmptyResults: true, skipOldReports: true, skipPublishingChecks: true, testResults:'**/test_reports/*.xml'
             git '$SUMMARY_URL'
             sh "echo '$JENKINS_USER' '$JENKINS_TOKEN' ${env.JENKINS_URL} ${env.JOB_NAME} ${env.BUILD_NUMBER} '$S3_BUCKET_NAME' '$AWS_KEY' '$AWS_TOKEN'"
