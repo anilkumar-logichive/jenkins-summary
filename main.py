@@ -22,10 +22,10 @@ secret_key = sys.argv[8]
 
 s3_client = boto3.client('s3', aws_access_key_id=access_key, aws_secret_access_key=secret_key)
 
-response = s3_client.list_buckets() 
+my_bucket = s3_client.Bucket('logichivebuildreport')
 
-for bucket in response['Buckets']:
-    print(bucket['Name'])
+for my_bucket_object in my_bucket.objects.all():
+    print(my_bucket_object.key)
 
 
 def fetch_build_info():
