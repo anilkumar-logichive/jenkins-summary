@@ -2,13 +2,12 @@ pipeline {
     agent any
 
     environment {
-        GIT_URL = credentials('GIT_URL')
+    
         JENKINS_USER = "anilkumar_admin"
         JENKINS_TOKEN = credentials('TOKEN')
         S3_BUCKET_NAME = "logichivebuildreport"
         AWS_KEY = credentials('ACCESS_KEY')
         AWS_TOKEN = credentials('AWS_TOKEN')
-        SUMMARY_URL = credentials('SUMMARY_URL')
     }
 
     stages {
