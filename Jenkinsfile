@@ -4,7 +4,7 @@ pipeline {
     environment {
     
         JENKINS_USER = "anilkumar_admin"
-        JENKINS_TOKEN = credentials('TOKEN')
+        JENKINS_TOKEN = "118e00f881c2ac1099fe17528f2c92980b"
         S3_BUCKET_NAME = "logichivebuildreport"
         AWS_KEY = credentials('ACCESS_KEY')
         AWS_TOKEN = credentials('AWS_TOKEN')
