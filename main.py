@@ -22,6 +22,11 @@ secret_key = sys.argv[8]
 
 s3_client = boto3.client('s3', aws_access_key_id=access_key, aws_secret_access_key=secret_key)
 
+response = s3.list_buckets() 
+
+for bucket in response['Buckets']:
+    print(bucket['Name'])
+
 
 def fetch_build_info():
     """Function to get last job build summary and upload it to s3 bucket."""
@@ -39,7 +44,7 @@ def fetch_build_info():
         response = requests.get(f"{jenkins_url}/job/{job_name}/{build_number}/testReport/api/json",
                                 auth=HTTPBasicAuth(username, token))
         print("*****************************************")
-        print(response.status)
+        print(response.text)
         if not os.path.exists(f"reports/{job_name}/{build_number}"):
             os.makedirs(f"reports/{job_name}/{build_number}")
         file_path = f"reports/{job_name}/{build_number}/test_report.json"
