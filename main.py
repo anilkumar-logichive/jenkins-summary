@@ -22,7 +22,8 @@ secret_key = sys.argv[8]
 
 s3_client = boto3.client('s3', aws_access_key_id=access_key, aws_secret_access_key=secret_key)
 
-
+print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+print(token)
 def fetch_build_info():
     """Function to get last job build summary and upload it to s3 bucket."""
     try:
