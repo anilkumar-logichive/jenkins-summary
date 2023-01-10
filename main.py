@@ -38,7 +38,8 @@ def fetch_build_info():
 
         response = requests.get(f"{jenkins_url}/job/{job_name}/{build_number}/testReport/api/json",
                                 auth=HTTPBasicAuth(username, token))
-
+        print("*****************************************")
+        print(response.status)
         if not os.path.exists(f"reports/{job_name}/{build_number}"):
             os.makedirs(f"reports/{job_name}/{build_number}")
         file_path = f"reports/{job_name}/{build_number}/test_report.json"
@@ -46,6 +47,7 @@ def fetch_build_info():
             try:
                 fw.write(json.dumps(response.json(), indent=4))
             except json.decoder.JSONDecodeError:
+                print("text", response.text)
                 server = jenkins.Jenkins(jenkins_url, username=username, password=token)
                 response = server.get_build_info(job_name, build_number)
                 fw.write(json.dumps(response, indent=4))
