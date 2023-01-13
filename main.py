@@ -30,13 +30,22 @@ def fetch_build_info():
         if not os.path.exists(f"reports/{job_name}/lastBuildNumber"):
             os.makedirs(f"reports/{job_name}/lastBuildNumber")
 
+        if not os.path.exists(f"reports/{job_name}/jobName"):
+            os.makedirs(f"reports/{job_name}/jobName")
+
+        file_path = f"reports/{job_name}/jobName/meta-jobs.json"
+        with open(file_path, "w") as fw:
+            fw.write(json.dumps({"jobName": job_name}, indent=4))
+        s3_client.upload_file(file_path, bucket_name,
+                              f"reports/{job_name}/jobName/meta-jobs.json", ExtraArgs={'ACL': 'public-read'})
+
         file_path = f"reports/{job_name}/lastBuildNumber/meta.json"
         with open(file_path, "w") as fw:
             fw.write(json.dumps({"lastBuildNumber": build_number}, indent=4))
         s3_client.upload_file(file_path, bucket_name,
                               f"reports/{job_name}/lastBuildNumber/meta.json", ExtraArgs={'ACL': 'public-read'})
 
-        response = requests.get(f"{jenkins_url}/job/{job_name}/{build_number}/testReport/api/json",
+        response = requests.get(f"{jenkins_url}testReport/api/json",
                                 auth=HTTPBasicAuth(username, token))
 
         if not os.path.exists(f"reports/{job_name}/{build_number}"):
