@@ -48,7 +48,7 @@ def fetch_build_info():
         print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
         print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
         print(token)
-        print(f"{jenkins_url}testReport/api/json")
+        print(f"{jenkins_url}api/json")
         response = requests.get(f"{jenkins_url}testReport/api/json",
                                 auth=HTTPBasicAuth(username, token))
         print(response.text)
