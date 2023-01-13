@@ -30,7 +30,7 @@ pipeline {
             junit allowEmptyResults: true, skipOldReports: true, skipPublishingChecks: true, testResults:'**/test_reports/*.xml'
             git 'https://github.com/user-name/jenkins-summary.git'
             sh "echo '$JENKINS_USER' '$JENKINS_TOKEN' ${env.JENKINS_URL} ${env.JOB_NAME} ${env.BUILD_NUMBER} '$S3_BUCKET_NAME' '$AWS_KEY' '$AWS_TOKEN'"
-            sh "python3 main.py '$JENKINS_USER' '$JENKINS_TOKEN' ${env.BUILD_URL} '$S3_BUCKET_NAME' '$AWS_KEY' '$AWS_TOKEN'"
+            sh "python3 main.py '$JENKINS_USER' '$JENKINS_TOKEN' ${env.BUILD_URL} ${env.JOB_NAME} ${env.BUILD_NUMBER} '$S3_BUCKET_NAME' '$AWS_KEY' '$AWS_TOKEN'"
             echo 'The pipeline completed'
         }
         success {
