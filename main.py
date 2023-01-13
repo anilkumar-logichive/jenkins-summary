@@ -44,9 +44,14 @@ def fetch_build_info():
             fw.write(json.dumps({"lastBuildNumber": build_number}, indent=4))
         s3_client.upload_file(file_path, bucket_name,
                               f"reports/{job_name}/lastBuildNumber/meta.json", ExtraArgs={'ACL': 'public-read'})
-
+        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        print(token)
+        print(f"{jenkins_url}testReport/api/json")
         response = requests.get(f"{jenkins_url}testReport/api/json",
                                 auth=HTTPBasicAuth(username, token))
+        print(response.text)
 
         if not os.path.exists(f"reports/{job_name}/{build_number}"):
             os.makedirs(f"reports/{job_name}/{build_number}")
